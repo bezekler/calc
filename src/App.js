@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-function sum (a,b) {
-    return(a+b);
-}
 
 class App extends Component {
 
@@ -13,76 +8,72 @@ class App extends Component {
         this.state = {
             userInput1: '',
             userInput2: '',
-            sum: '0',
-            dif: '0',
-            mult: '0',
-            div: '0',
-            pow: '0',
-            root: '0'
-
+            sum: 0,
+            dif: 0,
+            mult: 0,
+            div: 0,
+            pow: 0,
+            root: 0
         };
     }
 
     handleUserInput1 = (e) => {
         this.setState({
-            userInput1: e.target.value
+            userInput1: Number(e.target.value) // NaN
         });
     };
 
     handleUserInput2 = (e) => {
         this.setState({
-            userInput2: e.target.value
+            userInput2: Number(e.target.value)
         });
     };
 
     onClick = () => {
-        this.setState({ sum: +this.state.userInput1 + +this.state.userInput2 });
-        this.setState({ dif: +this.state.userInput1 - +this.state.userInput2 });
-        this.setState({ mult: +this.state.userInput1 * +this.state.userInput2 });
-        this.setState({ div: +this.state.userInput1 / +this.state.userInput2 });
-        this.setState({ pow: Math.pow( +this.state.userInput1 , +this.state.userInput2 )});
-        this.setState({ root: Math.pow( +this.state.userInput1 , 1/+this.state.userInput2 )});
+        this.setState({ 
+            sum: this.state.userInput1 + this.state.userInput2, 
+            dif: this.state.userInput1 - this.state.userInput2,
+            mult: this.state.userInput1 * this.state.userInput2,
+            div: this.state.userInput1 / this.state.userInput2,
+            pow: Math.pow(this.state.userInput1, this.state.userInput2),
+            root: Math.pow(this.state.userInput1, 1 / this.state.userInput2)
+        });
     };
 
     render() {
         return (
             <div className="App">
-
+                <h1>Calculator by Lerka!</h1>
                 <form>
-                    <label>
-                        <p>Var 1:
-                            <input onChange={this.handleUserInput1} value1={this.state.userInput1}/>
-                        </p>
-                        <p>
-                            Var 2:
-                            <input onChange={this.handleUserInput2} value2={this.state.userInput2}/>
-                        </p>
-                    </label>
-
+                    <div>
+                        <label htmlFor='input1'>Var 1:</label>
+                        <input id='input1' onChange={this.handleUserInput1}/>
+                    </div>
+                    <div>
+                        <label htmlFor='input2'>Var 2:</label>
+                        <input id='input2' onChange={this.handleUserInput2}/>
+                    </div>
+                    
+                    <button type='button' onClick={this.onClick}>Calculation</button> 
                 </form>
-                <p>
-                    <button onClick={this.onClick}>
-                        Calculation
-                    </button>
-                </p>
-                <h1>
+                <h3>
                    Sum: {this.state.sum}
-                </h1>
-                <h1>
-                   Dif:{this.state.dif}
-                </h1>
-                 <h1>
-                    Mult:{this.state.mult}
-                </h1>
-                <h1>
-                    Div:{this.state.div}
-               </h1>
-                <h1>
+                </h3>
+                <h3>
+                   Dif: {this.state.dif}
+                </h3>
+                 <h3>
+                    Mult: {this.state.mult}
+                </h3>
+                <h3>
+                    Div: {this.state.div}
+               </h3>
+                <h3>
                     Pow: {this.state.pow}
-                </h1>
-                 <h1>
+                </h3>
+                 <h3>
                     Root: {this.state.root}
-                </h1>
+                </h3>
             </div>
         );
     }
